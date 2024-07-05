@@ -1,0 +1,41 @@
+document.getElementById('signin-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    // Handle sign-in logic here
+    window.location.href = 'dashboard.html'; // Redirect to dashboard on successful sign-in
+});
+
+document.getElementById('signup-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    // Handle sign-up logic here
+    window.location.href = 'index.html'; // Redirect to sign-in page on successful sign-up
+});
+
+function uploadFile() {
+    const fileInput = document.getElementById('fileUpload');
+    const file = fileInput.files[0];
+    if (file) {
+        const fileName = prompt('Enter a name for the file:', file.name);
+        if (fileName) {
+            const fileList = document.getElementById('fileList');
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<a href="#" onclick="downloadFile('${fileName}')">${fileName}</a>`;
+            fileList.appendChild(listItem);
+        }
+    }
+}
+
+function downloadFile(fileName) {
+    // Handle file download logic here
+    alert(`Downloading ${fileName}`);
+}
+
+document.getElementById('profilePicUpload').addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('profilePic').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+});
